@@ -1,4 +1,12 @@
 public with sharing class DemonstraEstrutura {
+
+    //CONSTANTES
+    private static final Double TAXA_IFO = 0.5;
+    private static Double TAXA_IFO_VARIANTE = 0.5;
+    eNum DiaDaSemana{
+        DOMINGO, SEGUNDA, SABADO
+    }
+
     public DemonstraEstrutura() {
 
     }
@@ -105,7 +113,6 @@ public with sharing class DemonstraEstrutura {
         listDeInteiros.add(30);
         system.debug('listDeInteiros '+listDeInteiros);
 
-
         Account acc1 = new Account();
         acc1.Name = 'Conta 1';
         acc1.Phone = '1111111111111';
@@ -179,6 +186,161 @@ public with sharing class DemonstraEstrutura {
         Map<String, Integer> nomesIdadesMap = new Map<String,Integer>{'Maria' => 30, 'José' => 50, 'Tatiane' => 20, 'André' => 35};
         system.debug('A idade da terceira pessoa é: ' + nomesIdadesMap.get('Tatiane'));
 
+        //ENUM - enumeração
+        DiaDaSemana hoje = DiaDaSemana.SABADO;
+
     }
 
+    public static void condicionais(){
+        //IF == Se
+        Integer num = 5;
+
+        if(num > 2){
+            system.debug('É MAIOR DO QUE 2');
+        }
+
+        //ELSE IF + ELSE
+        Integer idade = 25;
+
+        //se a idade for menor que 18 escreve que é criança
+        // se a idade for maior ou IGUAL que 18 e menor do que 30 escrever você é jovem
+        // senão escrever você é adulto
+        //ESTRUTURA : IF + ELSE IF + ELSE
+        if(idade < 18){
+            system.debug('você é uma criança');
+        }else if(idade >= 18 && idade < 30){
+            system.debug('você é jovem');
+        }else{
+            if(idade > 60){
+                system.debug('você é idoso');
+            }else{
+                system.debug('você é adulto');
+            }
+        }
+
+        //TERNARIO DA CONDICAO ACIMA
+        String textoIdade = idade < 18 ? 'você é uma criança' : (idade >= 18 && idade < 30 ? 'você é jovem' : (idade > 60 ? 'você é idoso' :'você é adulto' ));
+        system.debug(textoIdade);
+
+        //SWITCH
+        //0 = Domingo, 1 = Segunda, 2 =Terça, 3 = Quarta .... 6 = Sabado
+        Integer dayWeek = 3;
+
+        switch on dayWeek{
+            when 0{
+                system.debug('Domingo');
+            }
+            when 1{
+                system.debug('Segunda');
+            }
+            when 2{
+                system.debug('Terça');
+            }
+            when else{
+                system.debug('Dia inválido');
+            }
+        }
+
+        //IF TERNÁRIO
+        Integer numVal  = 30;
+        String result = numVal > 5 ? 'Num é maior do que 5' : 'Num é menor ou igual a 5';
+    }
+
+    //LOOPS
+    public static void loops(){
+        //FOR
+        for(Integer i = 0; i < 10; i++){
+            system.debug('EXECUTOU O FOR COM O NUMERO '+i);
+        }
+
+        //WHILE
+        Integer count = 1;
+        while(count <= 10){
+            system.debug('Count é : '+count);
+            count++;
+        }
+
+        //DO-WHILE
+        Integer counter = 0;
+        do{
+            system.debug('O valor de COUNTER é: '+counter);
+            counter++;
+        }while (counter < 5);
+
+        //FOREACH
+        for(Account acc : [SELECT Name FROM Account]){
+            system.debug('O nome da conta é :'+acc.Name);
+        }
+
+        List<Integer> integerList = new List<Integer>{1,2,3,4,5,6,7,8,9};
+        for(Integer num : integerList){
+            system.debug('O valor de NUM é '+num);
+        }
+    }
+
+    //OPERADORES
+    public static void operadores(){
+        //ARITMETICOS + - * /
+        Integer exSoma = 1 + 2;
+        Integer exSub = 1 - 2;
+        Integer exMult = exSoma * exSub;
+        Integer exDiv = 10/5;
+
+        //ATRIBUIÇÃO =
+        Integer atribuiNum = 10;
+
+        //COMPARAÇÃO == != < > <= >=
+        if(exSoma == 3){
+
+        }
+        if(exSoma != 1){
+
+        }
+        if(exSoma  > 2){
+
+        }
+
+        //LÓGICOS && || !
+        if(exSoma > 2 && exSoma < 4){
+
+        }
+        if(exSoma > 2 || exSoma < 4){
+
+        }
+        if( !(exSoma == 3) ){
+            
+        }
+
+        //CONDICIONAIS ? :
+        String ternarioEx = exSoma > 3 ? 'É maior do que 3' : 'É menor ou igual à 3';
+    }
+
+    //OPERADORES DE ATRIBUIÇÃO
+    // =
+    // +=
+    // -=
+    // *=
+    // /=
+    // %= pega o resto de um número de uma divisão
+
+    //FUNÇÕES E MÉTODOS
+
+    //função para calcular a média de uma lista de números
+    //List<Double> doubleList = new List<Double>{10,20,5,50}
+    public static Double calcAvarege(List<Double> numbers){
+        Double sum = 0;
+        for(Double num : numbers){
+            sum += num;
+        }
+        return sum / numbers.size();
+    }
+    
+    /*
+    modificador_de_acesso(public|private) tipo_retorno nome_da_funcao(parametros){
+            //logica da função
+            return igual_ao_tipo_retorno;
+    }
+    */
+
+    //DESAFIO : fazer uma função, que recebe dois inteiros e retorna a soma deles.
 }
