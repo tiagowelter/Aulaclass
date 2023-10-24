@@ -20,3 +20,20 @@ public with sharing class ContaBancaria {
         this.saldoAtual += valorDepositado;
     }
 }
+/*
+ContaBancaria conta1 = new ContaBancaria('Gian',1000.00);
+system.debug('conta1 '+conta1);
+conta1.sacar(100.00);
+conta1.extrato();
+conta1.sacar(50.00);
+conta1.sacar(150.00);
+conta1.extrato();
+conta1.depositar(55);
+conta1.extrato();
+
+ContaBancaria conta2 = new ContaBancaria('André',2000.00);
+system.debug('conta2 '+conta2);
+
+conta1.depositar(5);
+conta1.extrato();
+*/
