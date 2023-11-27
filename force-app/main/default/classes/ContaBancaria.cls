@@ -2,6 +2,7 @@ public with sharing class ContaBancaria {
     public String nomeCorrentista;
     public Decimal saldoAtual;
 
+    //metodo construtor
     public ContaBancaria(String pNomeCorrentista, Decimal pSaldoAtual){
         this.nomeCorrentista = pNomeCorrentista;
         this.saldoAtual = pSaldoAtual;
@@ -19,7 +20,17 @@ public with sharing class ContaBancaria {
     public void depositar(Decimal valorDepositado){
         this.saldoAtual += valorDepositado;
     }
+
+    public String getName(){
+        return this.nomeCorrentista;
+    }
+
+    public void setName(String nomeCorrentista){
+        this.nomeCorrentista = name;
+    }
+
 }
+
 /*
 ContaBancaria conta1 = new ContaBancaria('Gian',1000.00);
 system.debug('conta1 '+conta1);

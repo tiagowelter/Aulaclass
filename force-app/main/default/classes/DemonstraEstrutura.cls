@@ -16,7 +16,7 @@ public with sharing class DemonstraEstrutura {
     Classe que demostra estrutura para nossa super aula com supers participantes
     */
     public static void variaveis(){
-        
+
         //Aqui é um exemplo de declaração de variável
         Boolean ehGremista = true;
         system.debug('a variavel ehGremista tem o valor de '+ehGremista);//isso é um sistem debug
@@ -93,13 +93,13 @@ public with sharing class DemonstraEstrutura {
 
         //Lista
         List<String> listNames = new List<String>();
-        
+
         //adicionando o nome da Ana
         listNames.add('Ana');
-        
+
         //adicionando o nome da Maria
         listNames.add('Maria');
-        
+
         //adiconando o nome do Carlos
         listNames.add('Carlos');
 
@@ -308,7 +308,7 @@ public with sharing class DemonstraEstrutura {
 
         }
         if( !(exSoma == 3) ){
-            
+
         }
 
         //CONDICIONAIS ? :
@@ -334,7 +334,7 @@ public with sharing class DemonstraEstrutura {
         }
         return sum / numbers.size();
     }
-    
+
     /*
     modificador_de_acesso(public|private) tipo_retorno nome_da_funcao(parametros){
             //logica da função
@@ -343,4 +343,63 @@ public with sharing class DemonstraEstrutura {
     */
 
     //DESAFIO : fazer uma função, que recebe dois inteiros e retorna a soma deles.
+
+    //Exemplo retorna uma lista com todos os contatos
+    public static List<Contact> getContacts(String name){
+        List<Contact> contactList = [SELECT Id, FirstName, LastName, Email FROM Contact WHERE FirstName = :name];
+        return contactList;
+    }
+
+    public static void adjustPhone(){
+        List<Contact> contactList = [SELECT Id, Email, Phone FROM Contact];
+
+        for(Contact cnt : contactList){
+            if(cnt.Phone == null){
+                system.debug('O contato está com o telefone vazio: '+cnt.Id);
+            }
+        }
+    }
+
+    //Exemplo DML
+    public static void exampleDml(){
+        List<Account> accList = [SELECT Id FROM Account WHERE Name = 'Teste 1'];
+        //Inserindo dados
+        Account acc = new Account();
+        acc.Name = 'Teste 1';
+        if(accList.size() == 0){
+            insert acc;
+        }
+
+        //Atualizar dados
+        Account accUpd = [SELECT Id, Name FROM Account WHERE Name = 'Teste 1' LIMIT 1];
+        accUpd.Name = 'Teste 2';
+        update accUpd;
+
+        //Exclui os registros
+        delete accList;
+    }
+
+    //Exemplo DML em massa
+    public static void exampleDmlMass(){
+        List<Account> accountToInsert = new List<Account>();
+
+        Account acc1 = new Account();
+        acc1.Name = 'Exemplo em massa 1';
+        acc1.CustomerPriority__c = 'Exemplo em massa 1';
+        accountToInsert.add(acc1);
+
+        Account acc2 = new Account();
+        acc2.Name = 'Exemplo em massa 2';
+        accountToInsert.add(acc2);
+
+        Account acc3 = new Account();
+        acc3.Name = 'Exemplo em massa 3';
+        accountToInsert.add(acc3);
+
+        Account acc4 = new Account();
+        acc4.Name = 'Exemplo em massa 4';
+        accountToInsert.add(acc4);
+
+        insert accountToInsert;
+    }
 }
