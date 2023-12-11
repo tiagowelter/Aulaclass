@@ -1,6 +1,5 @@
 trigger AccountTrigger on Account (before insert, after insert , before update, after update) {
 
-
     if(Trigger.isInsert && Trigger.isAfter){
         List<Opportunity> newOpps = new List<Opportunity>();
 
